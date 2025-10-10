@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.pushNamed(
           context,
           ProductDetailPage().routeName,
-          arguments: product, // pass whole product object
+          arguments: product.id, // only pass product ID
         );
       },
       child: Container(
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image (from network)
+            // Placeholder image (since we don’t have product object)
             ClipRRect(
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
@@ -162,48 +162,36 @@ class _HomePageState extends State<HomePage> {
                 height: 100,
                 width: 150,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.broken_image, size: 80),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
+            const Padding(
+              padding: EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+                    "Product Title",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
-                    "\$${product.price.toStringAsFixed(2)}",
-                    style: const TextStyle(color: Colors.green, fontSize: 14),
+                    "\$0.00",
+                    style: TextStyle(color: Colors.green, fontSize: 14),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.star, size: 14, color: Colors.amber),
-                          Text(
-                            product.rating.rate.toString(),
-                            style: const TextStyle(fontSize: 12),
-                          ),
+                          Icon(Icons.star, size: 14, color: Colors.amber),
+                          Text("0.0", style: TextStyle(fontSize: 12)),
                         ],
                       ),
-                      const Icon(
-                        Icons.favorite_border,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-                      const Icon(
+                      Icon(Icons.favorite_border, size: 16, color: Colors.grey),
+                      Icon(
                         Icons.shopping_cart_outlined,
                         size: 16,
                         color: Colors.red,
