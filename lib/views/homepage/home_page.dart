@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/product_model.dart';
 import 'package:ecommerce_app/services/product_service.dart';
+import 'package:ecommerce_app/views/loginpage/login_page.dart';
 import 'package:ecommerce_app/views/product_detail/product_detail.dart';
 import 'package:flutter/material.dart';
 
@@ -36,17 +37,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Promo Banner
-            Container(
-              margin: const EdgeInsets.all(12),
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                image: DecorationImage(
-                  image: AssetImage("assets/banner.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            _buildBanner(context),
 
             // Categories
             _buildSectionHeader("Shop By Categories"),
@@ -90,6 +81,25 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBanner(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, LoginPage().routeName);
+      },
+      child: Container(
+        margin: const EdgeInsets.all(12),
+        height: 150,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          image: DecorationImage(
+            image: AssetImage("assets/banner.png"),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
